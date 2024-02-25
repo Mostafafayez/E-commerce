@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/login', [Login::class, 'login']);
-Route::post('/sign_up', [Login::class, 'sign_up']);
+Route::post('/Sign_up', [Login::class, 'sign_up']);
