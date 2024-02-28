@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\orders;
+use App\Http\Controllers\products;
 use Illuminate\Http\Request;
 
 use  App\Http\Controllers\login;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +23,20 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/login', [Login::class, 'login']);
-Route::post('/Sign_up', [Login::class, 'sign_up']);
+Route::put('/Sign_up', [Login::class, 'sign_up']);
+
+
+Route::post('/add_product/{category_id}', [products::class, 'add_product']);
+Route::post('/update_product/{id}', [products::class, 'update_product']);
+Route::delete('/delete_product/{id}', [products::class, 'delete']);
+Route::get('/getAll_products', [products::class, 'get_all']);
+Route::get('/get_product/{id}', [products::class, 'get_by_id']);
+Route::get('/search', [products::class, 'searchByName']);
+
+
+
+
+Route::post('/add_order', [orders::class, 'store']);
+Route::get('/getAllOrders', [orders::class, 'getAllOrders']);
+Route::get('/get_order/{id}', [orders::class, 'getOrderById']);
+Route::delete('/delete_order', [orders::class, 'deleteOrderById']);
