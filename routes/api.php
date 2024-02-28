@@ -44,7 +44,7 @@ Route::delete('/delete_order', [orders::class, 'deleteOrderById']);
 //mohamned??
 
 
-use Illuminate\Support\Facades\Route;
+
 
 Route::get('/print-hi', function () {
     return "Hi";
