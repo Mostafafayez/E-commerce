@@ -42,3 +42,10 @@ Route::get('/get_order/{id}', [orders::class, 'getOrderById']);
 Route::delete('/delete_order', [orders::class, 'deleteOrderById']);
 /// mostafa//
 //mohamned??
+
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/print-hi', function () {
+    return "Hi";
+});
