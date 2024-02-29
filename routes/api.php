@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/login', [Login::class, 'login']);
-Route::put('/Sign_up', [Login::class, 'sign_up']);
+Route::post('/login', [login::class, 'login']);
+Route::post('/Sign_up', [login::class, 'sign_up']);
 
 
 Route::post('/add_product/{category_id}', [products::class, 'add_product']);
