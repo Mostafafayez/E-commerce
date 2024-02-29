@@ -46,6 +46,6 @@ Route::delete('/delete_order', [orders::class, 'deleteOrderById']);
 
 
 
-Route::get('/print-hi', function () {
-    return "Hi";
-});
+Route::get('/test',function(){
+    Artisan::call('storage:link');
+ });
