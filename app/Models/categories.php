@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class categories extends Model
+class Categories extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories'; 
+    protected $table = 'Categories'; 
     public $timestamps = false; // Correct property name and value to disable timestamps
 
     protected $fillable = [

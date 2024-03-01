@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\categories;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class Category extends Controller
@@ -15,7 +15,7 @@ class Category extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
     
-            $category = new categories;
+            $category = new Categories;
             $category->name = $request->input('name');
 
 
@@ -45,7 +45,7 @@ class Category extends Controller
 
     public function getAllCategories() {
         try {
-            $categories = categories::all();
+            $categories = Categories::all();
             return response()->json($categories, 200);
         } catch (\Exception $e) {
             return response()->json(["Error: " . $e->getMessage()], 500);
