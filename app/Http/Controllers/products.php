@@ -16,7 +16,11 @@ class products extends Controller
                 'description' => 'required|string',
                 'price' => 'required|numeric',
         'primary_image'=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'color' => 'required|array', // Ensure color is an array
+        'color.*' => 'required|string',
+        'size' => 'required|array', // Ensure color is an array
+        'size.*' => 'required|string',
             ]);
     
             $product = new Product;
@@ -44,7 +48,12 @@ class products extends Controller
         
                 $product->images = $filePaths;
             }
+            $colors = $request->input('color');
+            $product->color = $colors;
 
+
+            $size = $request->input('size');
+            $product->size = $size;
 
     
             $product->category_id = $num;

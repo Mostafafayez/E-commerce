@@ -21,11 +21,15 @@ class Product extends Model
         'price',
         'primary_image', 
         'images',
-        'user_id'
+        'user_id',
+        'color',
+        'size'
     ];
 
     protected $casts = [
         'images' => 'array', 
+        'color'=> 'array',
+        'size'=> 'array'
     ];
 
     protected $appends = ['full_src', 'full_src2'];
