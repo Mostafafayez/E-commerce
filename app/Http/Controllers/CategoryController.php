@@ -15,7 +15,7 @@ class CategoryController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
     
-            $category = new Categories;
+            $category = new Category;
             $category->name = $request->input('name');
 
 
