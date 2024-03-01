@@ -127,7 +127,7 @@ class products extends Controller
         public function get_all() {
             try {
                 $products = Product::all();
-                return response()->json(["Result" => $products], 200);
+                return response()->json( $products, 200);
             } catch (\Exception $e) {
                 return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
             }
@@ -136,7 +136,7 @@ class products extends Controller
         public function get_by_id($id) {
             try {
                 $product = Product::findOrFail($id);
-                return response()->json(["Result" => [$product]], 200); // Wrap $product in an array
+                return response()->json($product, 200); // Wrap $product in an array
             } catch (\Exception $e) {
                 return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
             }
@@ -151,7 +151,7 @@ class products extends Controller
             return response()->json(["Result" => "No product found with category_id {$category_id}"], 404);
         }
         
-        return response()->json(["Result" => $product], 200);
+        return response()->json($product, 200);
     } catch (\Exception $e) {
         return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
     }

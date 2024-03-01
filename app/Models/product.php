@@ -28,7 +28,7 @@ class Product extends Model
         'images' => 'array', 
     ];
 
-    protected $appends = ['full_src'];
+    protected $appends = ['full_src', 'full_src2'];
 
     public function category()
     {
@@ -49,5 +49,22 @@ class Product extends Model
             return ''; // Return empty string if no images are available
         }
     }
+
+    public function getFullSrc2Attribute()
+    {
+        if (!empty($this->images)) {
+            $imageUrls = [];
+            foreach ($this->images as $image) {
+                $imageUrls[] = asset('storage/'.$image);
+            }
+            return $imageUrls;
+        } else {
+            return []; // Return empty array if no images are available
+        }
+    }
+
+
+
+
 }
 

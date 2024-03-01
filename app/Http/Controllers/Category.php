@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\categories;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
-class Categories extends Controller
+class Category extends Controller
 {
 
     public function add_category(Request $request)
@@ -15,15 +15,15 @@ class Categories extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
     
-            $category = new Category;
+            $category = new Categories;
             $category->name = $request->input('name');
 
 
-            if ($req->hasFile('image')) {
-                $fileName = $req->file('image')->store('posts', 'public');
-                $product->image = $fileName;
+            if ($request->hasFile('image')) {
+                $fileName = $request->file('image')->store('posts', 'public');
+                $category->image = $fileName;
+              
             }
-
             
             $category->save();
     
@@ -40,15 +40,32 @@ class Categories extends Controller
     }
     
 
+    // public function getAllCategories()
+    // {
+    //     // Retrieve all categories using the Category model
+    //     $categories = categories::all();
+    
+    //     // Return the response with all categories
+    //     return response()->json(['categories' => $categories], 200);
+    // }
 
-    public function getAllcategories()
-    {
-       
-        $orders = categories-> all >get();
 
-        // Return the response with all order[[s
-        return response()->json(['category' => [$orders]], 200);
+
+    public function getAllCategories() {
+        try {
+            $categories = categories::all();
+            return response()->json($categories, 200);
+        } catch (\Exception $e) {
+            return response()->json(["Error: " . $e->getMessage()], 500);
+        }
     }
+
+
+
+
+
+
+
 
 }
 //
