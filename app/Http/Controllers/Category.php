@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Categories;
+use App\Models\categories;
 use Illuminate\Http\Request;
 
 class Category extends Controller
@@ -15,7 +15,7 @@ class Category extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
     
-            $category = new Categories;
+            $category = new categories;
             $category->name = $request->input('name');
 
 
