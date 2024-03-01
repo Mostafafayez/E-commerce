@@ -5,7 +5,7 @@ use App\Http\Controllers\products;
 use Illuminate\Http\Request;
 
 use  App\Http\Controllers\login;
-use  App\Http\Controllers\Category;
+use  App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -37,8 +37,8 @@ Route::get('/get_products/{categoryId}', [products::class, 'get_by_categoryId'])
 
 
 
-Route::post('/add_category', [Category::class, 'add_category']);
-Route::get('/get_category', [Category::class, 'getAllcategories']);
+Route::post('/add_category', [CategoryController::class, 'add_category']);
+Route::get('/get_category', [CategoryController::class, 'getAllcategories']);
 
 
 

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class Category extends Controller
+class CategoryController extends Controller
 {
 
     public function add_category(Request $request)
@@ -45,7 +45,7 @@ class Category extends Controller
 
     public function getAllCategories() {
         try {
-            $categories = Categories::all();
+            $categories = Category::all();
             return response()->json($categories, 200);
         } catch (\Exception $e) {
             return response()->json(["Error: " . $e->getMessage()], 500);
