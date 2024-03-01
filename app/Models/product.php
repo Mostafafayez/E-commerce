@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
+
+
+
 class Product extends Model
 {
     protected $table = 'products';
@@ -16,25 +19,35 @@ class Product extends Model
         'description',
         'category_id',
         'price',
-        'image',
-        'user_id' // Assuming this is the foreign key for the owner relationship
+        'primary_image', 
+        'images',
+        'user_id'
+    ];
+
+    protected $casts = [
+        'images' => 'array', 
     ];
 
     protected $appends = ['full_src'];
 
-    public function category(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(categories::class);
+        return $this->belongsTo(Category::class);
     }
 
-    public function owner(): BelongsTo
+    public function owner()
     {
-        return $this->belongsTo(users::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getFullSrcAttribute(): string
+    public function getFullSrcAttribute()
     {
-        return asset('storage/'.$this->image);
+        if (!empty($this->primary_image)) {
+            // Assuming you want to display the first image in the list
+            return asset('storage/'.$this->primary_image);
+        } else {
+            return ''; // Return empty string if no images are available
+        }
     }
 }
 
