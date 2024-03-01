@@ -127,7 +127,7 @@ class products extends Controller
         public function get_all() {
             try {
                 $products = Product::all();
-                return response()->json( $products, 200);
+                return response()->json($products, 200);
             } catch (\Exception $e) {
                 return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
             }
