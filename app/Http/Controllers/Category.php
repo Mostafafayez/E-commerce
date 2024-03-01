@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\categories;
+use App\Models\categori;
 use Illuminate\Http\Request;
 
 class Category extends Controller
