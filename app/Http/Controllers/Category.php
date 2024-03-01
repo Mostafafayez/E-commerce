@@ -40,14 +40,6 @@ class Category extends Controller
     }
     
 
-    // public function getAllCategories()
-    // {
-    //     // Retrieve all categories using the Category model
-    //     $categories = categories::all();
-    
-    //     // Return the response with all categories
-    //     return response()->json(['categories' => $categories], 200);
-    // }
 
 
 
