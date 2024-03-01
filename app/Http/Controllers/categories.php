@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\categories;
 use Illuminate\Http\Request;
 
-class categories extends Controller
+class Categories extends Controller
 {
 
     public function add_category(Request $request)
@@ -43,11 +43,11 @@ class categories extends Controller
 
     public function getAllcategories()
     {
-        // Retrieve all orders with their related user and products
+       
         $orders = categories-> all >get();
 
         // Return the response with all order[[s
-        return response()->json(['orders' => [$orders]], 200);
+        return response()->json(['category' => [$orders]], 200);
     }
 
 }

@@ -5,7 +5,7 @@ use App\Http\Controllers\products;
 use Illuminate\Http\Request;
 
 use  App\Http\Controllers\login;
-use  App\Http\Controllers\categories;
+use  App\Http\Controllers\Categories;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 /*
