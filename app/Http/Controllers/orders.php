@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 
-use App\Models\OrderDetailsS;
+use App\Models\OrderDetails;
 class orders extends Controller
 
 {
