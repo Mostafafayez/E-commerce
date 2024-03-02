@@ -55,7 +55,7 @@ class orders extends Controller
 
     
   
-public function getAllOrdersWithProducts()
+public function getOrderById()
 {
     // Retrieve all orders with their related products and user
     $orders = Order::with(['products', 'user'])->get();
