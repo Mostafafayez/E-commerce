@@ -32,7 +32,7 @@ Route::post('/update_product/{id}/{index_image}', [products::class, 'update_prod
 Route::delete('/delete_product/{id}', [products::class, 'delete']);
 Route::get('/getAll_products', [products::class, 'get_all']);
 Route::get('/get_product/{id}', [products::class, 'get_by_id']);
-Route::get('/search', [products::class, 'searchByName']);
+Route::post('/search', [products::class, 'searchByName']);
 Route::get('/get_products/{categoryId}', [products::class, 'get_by_categoryId']);
 
 
