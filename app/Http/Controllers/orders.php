@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Users; 
 
 use App\Models\OrderDetails;
 class orders extends Controller
@@ -56,7 +57,7 @@ class orders extends Controller
     public function getOrderById($id)
     {
         // Retrieve the order with the specified ID along with its related user and products
-        $order = Order::with('user', 'products')->where('user_id', $id)->get();
+        $order = Order::with('users', 'product')->where('user_id', $id)->get();
     
         // Check if the order exists
         if ($order->isEmpty()) {
