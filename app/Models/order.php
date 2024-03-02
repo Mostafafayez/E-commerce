@@ -15,26 +15,24 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'product_id',
         'user_id',
         'quantity'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(users::class);
+        return $this->belongsTo(User::class);
     }
     
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'order_product', 'order_id', 'product_id')->withPivot('quantity');
+        return $this->belongsToMany(Product::class, 'order_product', 'order_id', 'product_id')
+            ->withPivot('quantity', 'discount');
     }
-
-
-
-
-
-
-
 }
+
+
+
+
+
 

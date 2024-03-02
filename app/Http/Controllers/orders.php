@@ -6,29 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 
+use App\Models\orderDetails;
 class orders extends Controller
+
 {
-public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'product_id' => 'required|exists:products,id',
-        'quantity' => 'required|integer|min:1',
-    ]);
-
-    // Create a new order instance
-    $order = new Order();
-    $order->user_id = $request->input('user_id');
-    $order->save();
-
-    // Retrieve the product by its ID
-    $product = Product::findOrFail($request->input('product_id'));
-
-    // Attach the product to the order with the specified quantity
-    $order->products()->attach($product->id, ['quantity' => $request->input('quantity')]);
-
-    return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
-}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+    
+        // Create a new order instance
+        $order = new Order();
+        $order->user_id = $request->input('user_id');
+        $order->quantity = $request->input('quantity');
+        $order->save();
+    
+        // Create a new order detail instance
+        $orderDetail = new OrderDetail();
+        $orderDetail->order_id = $order->id;
+        $orderDetail->product_id = $request->input('product_id');
+        $orderDetail->save();
+    
+        return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
+    }
+    
 
 
 
