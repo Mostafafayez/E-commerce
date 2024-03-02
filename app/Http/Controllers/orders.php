@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 
-use App\Models\orderDetails;
+use App\Models\OrderDetails;
 class orders extends Controller
 
 {
@@ -25,7 +25,7 @@ class orders extends Controller
         $order->save();
     
         // Create a new order detail instance
-        $orderDetail = new OrderDetail();
+        $orderDetail = new OrderDetails();
         $orderDetail->order_id = $order->id;
         $orderDetail->product_id = $request->input('product_id');
         $orderDetail->save();
