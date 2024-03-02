@@ -54,20 +54,20 @@ class orders extends Controller
 
 
     
-    public function getOrderById($id)
-    {
-        // Retrieve the order with the specified ID along with its related user and products
-        $order = Order::with('users', 'product')->where('user_id', $id)->get();
-    
-        // Check if the order exists
-        if ($order->isEmpty()) {
-            return response()->json(['message' => 'Order not found'], 404);
-        }
-    
-        // Return the response with the order
-        return response()->json(['orders' => $order], 200);
+  
+public function getAllOrdersWithProducts()
+{
+    // Retrieve all orders with their related products and user
+    $orders = Order::with(['products', 'user'])->get();
+
+    // Check if any orders exist
+    if ($orders->isEmpty()) {
+        return response()->json(['message' => 'No orders found'], 404);
     }
-    
+
+    // Return the response with the orders and their related products and user
+    return response()->json(['orders' => $orders], 200);
+}
     
 
 
