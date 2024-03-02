@@ -189,7 +189,7 @@ class products extends Controller
                 $products = Product::where('name', 'like', '%' . $request->input('name') . '%')->get();
         
                 // Return the response with the matching products
-                return response()->json(['products' => $products], 200);
+                return response()->json( $products, 200);
             }
 
 
