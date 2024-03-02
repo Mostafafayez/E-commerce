@@ -52,27 +52,29 @@ class orders extends Controller
     }
 
 
+    
     public function getOrderById($id)
     {
         // Retrieve the order with the specified ID along with its related user and products
-        $order = Order::with('user', 'products')->find($id);
-
+        $order = Order::with('user', 'products')->where('user_id', $id)->get();
+    
         // Check if the order exists
-        if (!$order) {
+        if ($order->isEmpty()) {
             return response()->json(['message' => 'Order not found'], 404);
         }
-
+    
         // Return the response with the order
-        return response()->json(['order' => $order], 200);
+        return response()->json(['orders' => $order], 200);
     }
-
+    
+    
 
 
 
     public function deleteOrderById($id)
     {
         // Find the order by its ID
-        $order = Order::find($id);
+        $order =Order::find($id);
 
         // Check if the order exists
         if (!$order) {
