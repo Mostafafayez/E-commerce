@@ -10,6 +10,6 @@ class OrderDetails extends Pivot
 {
     protected $fillable = ['user_id', 'order_id', 'discount'];
 
-  
+    public $timestamps = false;
 }
 
