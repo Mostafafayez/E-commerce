@@ -22,7 +22,7 @@ class login extends Controller
         ]);
     
         // Retrieve the user by email
-        $user = User::where('email', $request->email)->first();
+        $user = users::where('email', $request->email)->first();
     
         // Check if a user was found and if the password is correct
         if ($user && Hash::check($request->password, $user->password)) {
