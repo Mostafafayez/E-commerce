@@ -8,7 +8,7 @@ use App\Models\Products;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Users;
+use App\Models\uusers;
 use App\Models\Product;
 class Order extends Model
 {
@@ -20,7 +20,7 @@ class Order extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\Models\Users', 'users_id');
+        return $this->belongsTo('App\Models\uusers', 'users_id');
     }
     
     public function Product()
