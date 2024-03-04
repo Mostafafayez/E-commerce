@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Userss; 
+use App\Models\users; 
 use Illuminate\Support\Facades\Hash; // Import Hash facade
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class login extends Controller
         ]);
     
         // Retrieve the user by email
-        $user = Users::where('email', $request->email)->first();
+        $user = users::where('email', $request->email)->first();
     
         // Check if a user was found and if the password is correct
         if ($user && $request->password === $user->password) {
