@@ -39,7 +39,7 @@ class login extends Controller
             }
         } else {
             // Authentication failed
-            return response()->json(['message' => 'Email or Password is incorrect'], 401);
+            return response()->json(['message' => 'Email or Password is incorrect', $user], 401);
         }
     }
 
