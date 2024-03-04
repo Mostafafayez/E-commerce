@@ -15,6 +15,7 @@ class Product extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'category_id',
@@ -68,10 +69,10 @@ class Product extends Model
     }
 
 
-        public function orders(){
-            return $this -> belongsToMany('App\Models\Order','OrderDetails','product_id','order_id');
-
-        }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
 
     

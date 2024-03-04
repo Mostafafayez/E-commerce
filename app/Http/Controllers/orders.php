@@ -48,7 +48,7 @@ class orders extends Controller
             $orderDetails = [
                 'order_id' => $order->id,
                 // Add other columns from the Order table as needed
-                'total_amount' => $order->total_amount,
+                'quantity' => $order->quantity,
                 // Add more columns as needed
             ];
     
@@ -60,26 +60,28 @@ class orders extends Controller
                     'user_id' => $user->id,
                     'name' => $user->name,
                     // Add other columns from the User table as needed
-                    'email' => $user->email,
+                    'address' => $user->address,
+                    'phone' => $user->phone,
                     // Add more columns as needed
                 ];
             }
     
             // Retrieve the associated product data
-            $products = $order->product;
+            $products = $order->Product;
+
             // var_dump($products);
     
-            foreach ($products as $products) {
+            // foreach ($products as $products) {
+                if ($products) {
                 $productData[] = [
                     'product_id' => $products->id,
                     'name' => $products->name,
-                
                     'price' => $products->price,
-                   
                 ];
             }
+            // }
     
-            // Combine order data, user data, and product data for the current order
+        
             $orderData[] = [
                 'order' => $orderDetails,
                 'user' => $userData,
