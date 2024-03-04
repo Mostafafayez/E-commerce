@@ -15,6 +15,7 @@ class products extends Controller
                 'name' => 'required|string|max:255',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
+                // 'discount' => 'required',
         'primary_image'=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'color' => 'required|array', // Ensure color is an array

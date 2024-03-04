@@ -24,8 +24,15 @@ class Product extends Model
         'images',
         'users_id',
         'color',
-        'size'
+        'size',
+        'discount',
+        'new_price',
     ];
+
+    public function getNewPriceAttribute()
+    {
+        return $this->price * (1 - ($this->discount / 100));
+    }
 
     protected $casts = [
         'images' => 'array', 
