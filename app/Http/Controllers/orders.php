@@ -18,6 +18,10 @@ class orders extends Controller
             'users_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+            'color' => 'required|string|max:255',
+            'size' => 'required|string|max:255'
+
         ]);
     
         // Create a new order instance
@@ -27,6 +31,9 @@ class orders extends Controller
         $order->users_id = $request->input('users_id'); // Corrected column name
         $order->product_id = $request->input('product_id');
         $order->quantity = $request->input('quantity');
+        $order->price = $request->input('price');
+        $order->color = $request->input('color');
+        $order->size = $request->input('size');
     
         // Save the order to the database
         $order->save();
