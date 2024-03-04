@@ -30,16 +30,16 @@ class login extends Controller
             // Retrieve the user's role from the database based on user_id
             $userRole = $user->type_id;
             if ($userRole == 1) {
-                return response()->json(['type' => 'admin'], 200);
+                return response()->json(['type' => 'admin', $user], 200);
             } elseif ($userRole == 2) {
-                return response()->json(['type' => 'user'], 200);
+                return response()->json(['type' => 'user', $user], 200);
             } else {
                 // Unknown user role
                 return response()->json(['message' => 'Unknown user role'], 403);
             }
         } else {
             // Authentication failed
-            return response()->json(['message' => 'Email or Password is incorrect', $user], 401);
+            return response()->json(['message' => 'Email or Password is incorrect'], 401);
         }
     }
 
