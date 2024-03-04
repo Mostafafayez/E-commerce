@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\Products;
-use App\Models\Users; 
+use App\Models\Product;
+use App\Models\users; 
 
 use App\Models\OrderDetails;
 class orders extends Controller
@@ -34,23 +34,66 @@ class orders extends Controller
         return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
     }
     
-
-
-
-
-
-
-
-
-
     public function getAllOrders()
     {
-        // Retrieve all orders with their related user and products
-        $orders = Order::with('user', 'products')->get();
-
-        // Return the response with all orders
-        return response()->json(['orders' => $orders], 200);
+        $orderData = []; // Initialize an empty array to store order data
+    
+        $orders = Order::all();
+    
+        foreach ($orders as $order) {
+            $userData = []; // Initialize an empty array to store user data for each order
+            $productData = []; // Initialize an empty array to store product data for each order
+    
+            // Retrieve the order data
+            $orderDetails = [
+                'order_id' => $order->id,
+                // Add other columns from the Order table as needed
+                'total_amount' => $order->total_amount,
+                // Add more columns as needed
+            ];
+    
+            // Retrieve the associated user data
+            $user = $order->user;
+    
+            if ($user) {
+                $userData = [
+                    'user_id' => $user->id,
+                    'name' => $user->name,
+                    // Add other columns from the User table as needed
+                    'email' => $user->email,
+                    // Add more columns as needed
+                ];
+            }
+    
+            // Retrieve the associated product data
+            $products = $order->product;
+            // var_dump($products);
+    
+            foreach ($products as $products) {
+                $productData[] = [
+                    'product_id' => $products->id,
+                    'name' => $products->name,
+                
+                    'price' => $products->price,
+                   
+                ];
+            }
+    
+            // Combine order data, user data, and product data for the current order
+            $orderData[] = [
+                'order' => $orderDetails,
+                'user' => $userData,
+                 'products' => $productData,
+              
+            ];
+        }
+    
+        return response()->json(['orders' => $orderData], 200);
     }
+    
+
+
+
 
 
     

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class OrderDetails extends Pivot
 
 {
-    protected $fillable = ['user_id', 'order_id', 'discount'];
+    protected $fillable = ['product_id', 'order_id', 'discount'];
 
     public $timestamps = false;
 }

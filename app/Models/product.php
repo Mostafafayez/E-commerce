@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
-
+ use App\Models\users;
 
 
 
@@ -21,7 +21,7 @@ class Product extends Model
         'price',
         'primary_image', 
         'images',
-        'user_id',
+        'users_id',
         'color',
         'size'
     ];
@@ -41,7 +41,7 @@ class Product extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(users::class, 'user_id');
     }
 
     public function getFullSrcAttribute()
@@ -64,11 +64,20 @@ class Product extends Model
             return $imageUrls;
         } else {
             return []; // Return empty array if no images are available
+        };
+    }
+
+
+        public function orders(){
+            return $this -> belongsToMany('App\Models\Order','OrderDetails','product_id','order_id');
+
         }
+
+
+    
     }
 
 
 
 
-}
 

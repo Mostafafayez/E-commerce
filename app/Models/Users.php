@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Order;
 class users extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -40,6 +40,16 @@ class users extends Authenticatable
     ];
 
     public $timestamps = false;
+//     public function orders(){
+// return $this -> belongsToMany('App\Models\Order','OrderDetails','user_id','id','id');
+
+    // }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    
+    
 
 
 
