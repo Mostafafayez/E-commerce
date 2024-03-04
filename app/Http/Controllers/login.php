@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users; 
+use App\Models\users; 
 use Illuminate\Support\Facades\Hash; // Import Hash facade
 use Illuminate\Http\Request;
 
@@ -28,7 +28,7 @@ class login extends Controller
         if ($user && $request->password === $user->password) {
             // Authentication successful
             // Retrieve the user's role from the database based on user_id
-            $userRole = $user->user_id;
+            $userRole = $user->type_id;
             if ($userRole == 1) {
                 return response()->json(['type' => 'admin'], 200);
             } elseif ($userRole == 2) {
@@ -60,8 +60,8 @@ class login extends Controller
             $hashedPassword = Hash::make($request->password);
     
             // Create a new user record with user_id = 2
-            $user = Users::create([
-                'user_id' => 2, // Set user_id to 2
+            $user = users::create([
+                'type_id' => 2, // Set user_id to 2
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone' => $request->phone,
