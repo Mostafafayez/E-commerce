@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [login::class, 'login']);
 Route::post('/Sign_up', [login::class, 'sign_up']);
+Route::post('/updateUserInfo/{id}', [login::class, 'updateUserInfo']);
 
 
 Route::post('/add_product/{category_id}/{user_id}', [products::class, 'add_product']);

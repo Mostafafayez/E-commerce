@@ -39,7 +39,7 @@ class login extends Controller
             }
         } else {
             // Authentication failed
-            return response()->json(['message' => 'Email or Password is incorrect'], 401);
+            return response()->json(['message' => 'Email or Password is incorrect', $user], 401);
         }
     }
 
@@ -61,7 +61,7 @@ class login extends Controller
     
             // Create a new user record with user_id = 2
             $user = users::create([
-                'type_id' => 2, // Set user_id to 2
+                'type_id' => 2, 
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone' => $request->phone,
@@ -76,6 +76,47 @@ class login extends Controller
                 return response()->json(['message' => 'Failed to register user'], 500);
             }
         }
+
+
+
+
+        public function updateUserInfo(Request $request, $id)
+        {
+            // Validate the request data
+            $request->validate([
+                'name' => 'nullable|string|max:255',
+                'address' => 'nullable|string|max:255',
+                'phone' => 'nullable|string|max:20',
+            ]);
+        
+     
+            $user = users::findOrFail($id);
+        
+            // Check if user exists
+            if (!$user) {
+                return response()->json(["error" => "No user found"], 404);
+            }
+        
+            // Update user information
+            if ($request->has('name')) {
+                $user->name = $request->name;
+            }
+        
+            if ($request->has('address')) {
+                $user->address = $request->address;
+            }
+        
+            if ($request->has('phone')) {
+                $user->phone = $request->phone;
+            }
+        
+            // Save the updated user information
+            $user->save();
+        
+            // Return a response indicating success
+            return response()->json(['message' => 'User information updated successfully'], 200);
+        }
+        
     }
     
 
