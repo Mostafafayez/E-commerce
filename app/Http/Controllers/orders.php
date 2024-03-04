@@ -41,37 +41,32 @@ class orders extends Controller
         $orders = Order::all();
     
         foreach ($orders as $order) {
-            $userData = []; // Initialize an empty array to store user data for each order
-            $productData = []; // Initialize an empty array to store product data for each order
+            $userData = []; 
+            $productData = []; 
     
-            // Retrieve the order data
+          
             $orderDetails = [
                 'order_id' => $order->id,
-                // Add other columns from the Order table as needed
                 'quantity' => $order->quantity,
-                // Add more columns as needed
+               
             ];
     
-            // Retrieve the associated user data
             $user = $order->user;
     
             if ($user) {
                 $userData = [
                     'user_id' => $user->id,
                     'name' => $user->name,
-                    // Add other columns from the User table as needed
                     'address' => $user->address,
                     'phone' => $user->phone,
-                    // Add more columns as needed
+                   
                 ];
             }
     
-            // Retrieve the associated product data
             $products = $order->Product;
 
             // var_dump($products);
     
-            // foreach ($products as $products) {
                 if ($products) {
                 $productData[] = [
                     'product_id' => $products->id,
@@ -79,9 +74,7 @@ class orders extends Controller
                     'price' => $products->price,
                 ];
             }
-            // }
-    
-        
+       
             $orderData[] = [
                 'order' => $orderDetails,
                 'user' => $userData,
@@ -100,19 +93,66 @@ class orders extends Controller
 
     
   
-public function getOrderById()
-{
-    // Retrieve all orders with their related products and user
-    $orders = Order::with(['products', 'user'])->get();
-
-    // Check if any orders exist
-    if ($orders->isEmpty()) {
-        return response()->json(['message' => 'No orders found'], 404);
+    public function getOrderById($users_id)
+    {
+        // Initialize the array to store order data
+        $orderData = [];
+    
+        // Retrieve orders for the specified user ID
+        $orders = Order::where('users_id', $users_id)->get();
+    
+        // Loop through each order
+        foreach ($orders as $order) {
+            // Initialize arrays to store user and product data
+            $userData = [];
+            $productData = [];
+    
+            // Retrieve order details
+            $orderDetails = [
+                'order_id' => $order->id,
+                'quantity' => $order->quantity,
+            ];
+    
+            // Retrieve user details if available
+            $user = $order->user;
+            if ($user) {
+                $userData = [
+                    'user_id' => $user->id,
+                    'name' => $user->name,
+                    'address' => $user->address,
+                    'phone' => $user->phone,
+                ];
+            }
+    
+            // Retrieve products associated with the order
+            $products = $order->product;
+    
+            
+            if ($products) {
+                $productData[] = [
+                    'product_id' => $products->id,
+                    'name' => $products->name,
+                    'price' => $products->price,
+                ];
+            }
+    
+            // Store order, user, and product data in the orderData array
+            $orderData[] = [
+                'order' => $orderDetails,
+                'user' => $userData,
+                'products' => $productData,
+            ];
+        }
+    
+        // Check if no orders were found for the user
+        if (empty($orderData)) {
+            return response()->json(['message' => 'No orders found'], 404);
+        }
+    
+        // Return JSON response with order data
+        return response()->json(['orders' => $orderData], 200);
     }
-
-    // Return the response with the orders and their related products and user
-    return response()->json(['orders' => $orders], 200);
-}
+    
     
 
 
