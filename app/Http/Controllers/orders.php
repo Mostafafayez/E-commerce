@@ -58,6 +58,10 @@ class orders extends Controller
             $orderDetails = [
                 'order_id' => $order->id,
                 'quantity' => $order->quantity,
+                'price'   =>  $order->price,
+                'color'   =>  $order->color,
+                'size'   =>  $order->size,
+
                
             ];
     
