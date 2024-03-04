@@ -47,7 +47,7 @@ Route::get('/get_category', [CategoryController::class, 'getAllcategories']);
 
 Route::post('/add_order', [orders::class, 'store']);
 Route::get('/getAllOrders', [orders::class, 'getAllOrders']);
-Route::get('/get_order/{id}', [orders::class, 'getOrderById']);
+Route::get('/get_order/{user_id}', [orders::class, 'getOrderById']);
 Route::delete('/delete_order/{id}', [orders::class, 'deleteOrderById']);
 /// mostafa//
 //mohamned??

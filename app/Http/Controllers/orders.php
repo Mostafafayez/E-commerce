@@ -13,26 +13,29 @@ class orders extends Controller
 {
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'users_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ]);
     
         // Create a new order instance
         $order = new Order();
-        $order->user_id = $request->input('user_id');
+        
+        // Assign user ID, product ID, and quantity to the order instance
+        $order->users_id = $request->input('users_id'); // Corrected column name
+        $order->product_id = $request->input('product_id');
         $order->quantity = $request->input('quantity');
+    
+        // Save the order to the database
         $order->save();
     
-        // Create a new order detail instance
-        $orderDetail = new OrderDetails();
-        $orderDetail->order_id = $order->id;
-        $orderDetail->product_id = $request->input('product_id');
-        $orderDetail->save();
-    
+        // Return a JSON response indicating successful order creation
         return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
     }
+    
+    
     
     public function getAllOrders()
     {
