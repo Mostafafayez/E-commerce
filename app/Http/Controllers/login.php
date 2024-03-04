@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\users; 
+use App\Models\Userss; 
 use Illuminate\Support\Facades\Hash; // Import Hash facade
 use Illuminate\Http\Request;
 
