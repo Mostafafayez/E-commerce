@@ -52,6 +52,7 @@ class login extends Controller
                 'name' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
                 'phone' => 'required|string|max:20',
+                // 'phone2' => 'required|string|max:20',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
             ]);
@@ -65,6 +66,7 @@ class login extends Controller
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone' => $request->phone,
+                // 'phone2' => $request->phone2,
                 'email' => $request->email,
                 'password' => $hashedPassword,
             ]);
