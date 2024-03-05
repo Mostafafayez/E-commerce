@@ -118,7 +118,7 @@ class orders extends Controller
         // Loop through each order
         foreach ($orders as $order) {
             // Initialize arrays to store user and product data
-            // $userData = [];
+          
             $productData = [];
     
             // Retrieve order details

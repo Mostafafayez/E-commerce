@@ -74,54 +74,90 @@ class products extends Controller
     }
     
 
-    // public function update_product(Request $req, $id, $imageIndex) {
-    //     try {
-    //         $product = Product::findOrFail($id); // Find the product by ID
-    
-    //         // Validate only the fields that are present in the request
-    //         $req->validate([
-    //             'name' => 'sometimes|string|max:255',
-    //             'description' => 'sometimes|string',
-    //             'price' => 'sometimes|numeric',
-    //             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //             'images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         ]);
-    
-    //         // Update the product fields if they are present in the request
-    //         if ($req->has('name')) {
-    //             $product->name = $req->input('name');
-    //         }
-    //         if ($req->has('description')) {
-    //             $product->description = $req->input('description');
-    //         }
-    //         if ($req->has('price')) {
-    //             $product->price = $req->input('price');
-    //         }
-    //         if ($req->hasFile('image')) {
-    //             $fileName = $req->file('image')->store('posts', 'public');
-    //             $product->image = $fileName;
-    //         }
-    
-    //         if ($request->hasFile('images')) {
-    //             $filePaths = $product->images; // Get existing image paths
-    //             $imageFiles = $request->file('images');
 
 
-    //             if (isset($imageFiles[$imageIndex])) {
-    //                 $fileName = $imageFiles[$imageIndex]->store('posts', 'public');
-    //                 $filePaths[$imageIndex] = $fileName; // Update the specific image path
-    //             }
-    //             $product->images = $filePaths;
-    //         }
+
+    public function update_product(Request $request, $product_id)
+    {
+        try {
+            // Validate the fields present in the request
+            $request->validate([
+                'name' => 'string|max:255',
+                'description' => 'string',
+                'price' => 'numeric',
+                'primary_image'=> 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'color' => 'array', // Ensure color is an array
+                'color.*' => 'string',
+                'size' => 'array', // Ensure size is an array
+                'size.*' => 'string',
+            ]);
     
-    //         $product->save();
+            $product = Product::findOrFail($product_id);
     
-    //         return response()->json(["Result" => "Product updated successfully", "Product" => $product], 200);
+            // Check if any fields are being updated
+            $updated = false;
     
-    //     } catch (\Exception $e) {
-    //         return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
-    //     }
-    // }
+            // Update the product with the fields present in the request
+            if ($request->has('name')) {
+                $product->name = $request->input('name');
+                $updated = true;
+            }
+            if ($request->has('description')) {
+                $product->description = $request->input('description');
+                $updated = true;
+            }
+            if ($request->has('price')) {
+                $product->price = $request->input('price');
+                $updated = true;
+            }
+            if ($request->hasFile('primary_image')) {
+                $fileName = $request->file('primary_image')->store('posts', 'public');
+                $product->primary_image = $fileName;
+                $updated = true;
+            }
+            if ($request->hasFile('images')) {
+                $filePaths = [];
+                foreach ($request->file('images') as $image) {
+                    $fileName = $image->store('posts', 'public');
+                    $filePaths[] = $fileName;
+                }
+                $product->images = $filePaths;
+                $updated = true;
+            }
+            if ($request->has('color')) {
+                $product->color = $request->input('color');
+                $updated = true;
+            }
+            if ($request->has('size')) {
+                $product->size = $request->input('size');
+                $updated = true;
+            }
+    
+            // Save the updated product if any fields are updated
+            if ($updated) {
+                $product->save();
+                return response()->json(["Result" => "Product updated successfully", "Product" => $product], 200);
+            } else {
+                return response()->json(["Result" => "No data to update"], 200);
+            }
+    
+        } catch (\Exception $e) {
+            if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                return response()->json(["Result" => "Product not found"], 404);
+            } elseif ($e instanceof \Illuminate\Validation\ValidationException) {
+                return response()->json(["Result" => "Validation Error: " . $e->getMessage()], 400);
+            } else {
+                return response()->json(["Result" => "Error: " . $e->getMessage()], 500);
+            }
+        }
+    }
+    
+    
+
+
+
+
     
 
         public function delete($id) {

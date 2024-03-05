@@ -29,12 +29,14 @@ Route::put('/updateUserInfo/{id}', [login::class, 'updateUserInfo']);
 
 
 Route::post('/add_product/{category_id}/{user_id}', [products::class, 'add_product']);
-Route::post('/update_product/{id}/{index_image}', [products::class, 'update_product']);
+// Route::post('/update_product/{id}/{index_image}', [products::class, 'update_product']);
 Route::delete('/delete_product/{id}', [products::class, 'delete']);
 Route::get('/getAll_products', [products::class, 'get_all']);
 Route::get('/get_product/{id}', [products::class, 'get_by_id']);
 Route::post('/search', [products::class, 'searchByName']);
 Route::get('/get_products/{categoryId}', [products::class, 'get_by_categoryId']);
+Route::post('/update_product/{Id}', [products::class,'update_product']);
+
 
 
 

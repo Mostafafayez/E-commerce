@@ -26,7 +26,7 @@ class Product extends Model
         'color',
         'size',
         'discount',
-        'new_price',
+       'new_price', 
     ];
 
     public function getNewPriceAttribute()
