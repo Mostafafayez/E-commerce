@@ -8,6 +8,7 @@ use  App\Http\Controllers\login;
 use  App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OffersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,11 +53,14 @@ Route::post('/add_order', [orders::class, 'store']);
 Route::get('/getAllOrders', [orders::class, 'getAllOrders']);
 Route::get('/get_order/{user_id}', [orders::class, 'getOrderById']);
 Route::delete('/delete_order/{order_id}', [orders::class, 'deleteOrderById']);
-/// mostafa//
-//mohamned??
 
 
 
+
+Route::post('/add_offer', [OffersController::class,'store']);
+Route::get('/get_offers', [OffersController::class, 'get_offers']);
+Route::get('/get_offer/{id}', [OffersController::class , 'show']);
+Route::delete('/delete_offer/{id}', [OffersController::class, 'destroy']);
 
 Route::get('/test',function(){
     Artisan::call('storage:link');
