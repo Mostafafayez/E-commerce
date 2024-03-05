@@ -142,7 +142,7 @@ class orders extends Controller
             }
         
             // Store order and product data in the named array
-            $orderData[][order_Details] = [
+            $orderData[]= [
                 'order' => $orderDetails,
                 'products' => $productData,
             ];
