@@ -110,7 +110,7 @@ class orders extends Controller
     public function getOrderById($users_id)
     {
         // Initialize the array to store order data
-        $orderData = [];
+        $orderData['order_details'] = [];
     
         // Retrieve orders for the specified user ID
         $orders = Order::where('users_id', $users_id)->get();
