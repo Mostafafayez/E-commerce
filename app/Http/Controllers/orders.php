@@ -118,7 +118,7 @@ class orders extends Controller
         // Loop through each order
         foreach ($orders as $order) {
             // Initialize arrays to store user and product data
-            $userData = [];
+            // $userData = [];
             $productData = [];
     
             // Retrieve order details
@@ -131,15 +131,15 @@ class orders extends Controller
             ];
     
             // Retrieve user details if available
-            $user = $order->user;
-            if ($user) {
-                $userData = [
-                    'user_id' => $user->id,
-                    'name' => $user->name,
-                    'address' => $user->address,
-                    'phone' => $user->phone,
-                ];
-            }
+            // $user = $order->user;
+            // if ($user) {
+            //     $userData = [
+            //         'user_id' => $user->id,
+            //         'name' => $user->name,
+            //         'address' => $user->address,
+            //         'phone' => $user->phone,
+            //     ];
+            // }
     
             // Retrieve products associated with the order
             $products = $order->product;
@@ -156,7 +156,7 @@ class orders extends Controller
             // Store order, user, and product data in the orderData array
             $orderData[] = [
                 'order' => $orderDetails,
-                'user' => $userData,
+                // 'user' => $userData,
                 'products' => $productData,
             ];
         }
