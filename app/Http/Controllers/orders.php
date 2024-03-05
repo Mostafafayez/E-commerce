@@ -146,10 +146,10 @@ class orders extends Controller
     
             
             if ($products) {
-                $productData[] = [
+                $productData= [
                     'product_id' => $products->id,
                     'name' => $products->name,
-                    'price' => $products->price,
+                    // 'price' => $products->price,
                 ];
             }
     
