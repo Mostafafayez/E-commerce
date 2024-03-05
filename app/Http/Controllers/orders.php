@@ -167,7 +167,7 @@ class orders extends Controller
         }
     
         // Return JSON response with order data
-        return response()->json(['orders' => [$orderData]], 200);
+        return response()->json(['orders' => $orderData], 200);
     }
     
     
