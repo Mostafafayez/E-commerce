@@ -154,7 +154,7 @@ class orders extends Controller
             }
     
             // Store order, user, and product data in the orderData array
-            $orderData['order_details'][] = [
+            $orderData[]['order_details'] = [
                 'order' => $orderDetails,
                 // 'user' => $userData,
                 'products' => $productData,
