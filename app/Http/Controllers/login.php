@@ -91,8 +91,8 @@ class login extends Controller
                 'phone' => 'nullable|string|max:20',
             ]);
         
-     
-            $user = users::findOrFail($id);
+            // Find the user by ID
+            $user = User::find($id);
         
             // Check if user exists
             if (!$user) {
@@ -100,15 +100,15 @@ class login extends Controller
             }
         
             // Update user information
-            if ($request->has('name')) {
+            if ($request->filled('name')) {
                 $user->name = $request->name;
             }
         
-            if ($request->has('address')) {
+            if ($request->filled('address')) {
                 $user->address = $request->address;
             }
         
-            if ($request->has('phone')) {
+            if ($request->filled('phone')) {
                 $user->phone = $request->phone;
             }
         
