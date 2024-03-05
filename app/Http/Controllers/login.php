@@ -92,7 +92,7 @@ class login extends Controller
             ]);
         
             // Find the user by ID
-            $user = User::find($id);
+            $user = users::find($id);
         
             // Check if user exists
             if (!$user) {
