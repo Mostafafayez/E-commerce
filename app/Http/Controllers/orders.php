@@ -72,8 +72,8 @@ class orders extends Controller
                     'user_id' => $user->id,
                     'name' => $user->name,
                     'address' => $user->address,
-                    'phone' => $user->phone,
-                   
+                    'phonenum1' => $user->phonenum1,
+                    'phonenum2' => $user->phonenum2,
                 ];
             }
     

@@ -65,7 +65,7 @@ class login extends Controller
                 'type_id' => 2, 
                 'name' => $request->name,
                 'address' => $request->address,
-                'phonenum1' => $request->phone,
+                'phonenum1' => $request->phonenum1,
                 'phonenum2' => $request->phonenum2,
                 'email' => $request->email,
                 'password' => $hashedPassword,
@@ -110,11 +110,11 @@ class login extends Controller
                 $user->address = $request->address;
             }
             if ($request->filled('phonenum1' )) {
-                $user->phone = $request->phone;
+                $user->phonenum1 = $request->phonenum1;
             }
         
             if ($request->filled('phonenum2')) {
-                $user->phone = $request->phone;
+                $user->phonenum2 = $request->phonenum2;
             }
 
 
