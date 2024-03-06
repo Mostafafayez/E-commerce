@@ -51,8 +51,8 @@ class login extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'address' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
-                // 'phone2' => 'required|string|max:20',
+                'phonenum1' => 'required|string|max:20',
+                'phonenum2' => 'required|string|max:20',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
             ]);
@@ -65,8 +65,8 @@ class login extends Controller
                 'type_id' => 2, 
                 'name' => $request->name,
                 'address' => $request->address,
-                'phone' => $request->phone,
-                // 'phone2' => $request->phone2,
+                'phonenum1' => $request->phone,
+                'phonenum2' => $request->phonenum2,
                 'email' => $request->email,
                 'password' => $hashedPassword,
             ]);
@@ -88,7 +88,9 @@ class login extends Controller
             $request->validate([
                 'name' => 'nullable|string|max:255',
                 'address' => 'nullable|string|max:255',
-                'phone' => 'nullable|string|max:20',
+                'phonenum1' => 'required|string|max:20',
+                'phonenum2' => 'required|string|max:20',
+                
             ]);
         
             // Find the user by ID
@@ -107,10 +109,17 @@ class login extends Controller
             if ($request->filled('address')) {
                 $user->address = $request->address;
             }
-        
-            if ($request->filled('phone')) {
+            if ($request->filled('phonenum1' )) {
                 $user->phone = $request->phone;
             }
+        
+            if ($request->filled('phonenum2')) {
+                $user->phone = $request->phone;
+            }
+
+
+
+
         
             // Save the updated user information
             $user->save();

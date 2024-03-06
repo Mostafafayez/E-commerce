@@ -9,6 +9,7 @@ use  App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OffersController;
+use App\Http\Controllers\productControl;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,6 +38,15 @@ Route::get('/get_product/{id}', [products::class, 'get_by_id']);
 Route::post('/search', [products::class, 'searchByName']);
 Route::get('/get_products/{categoryId}', [products::class, 'get_by_categoryId']);
 Route::post('/update_product/{Id}', [products::class,'update_product']);
+
+
+//product_control
+Route::get('/Approve_product/{Id}', [productControl::class,'approveProduct']);
+Route::get('/Reject_Product/{Id}', [productControl::class,'rejectProduct']);
+
+
+
+
 
 
 

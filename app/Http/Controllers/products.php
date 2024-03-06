@@ -29,6 +29,7 @@ class products extends Controller
             $product->price = $request->input('price');
             $product->name = $request->input('name');
             $product->description = $request->input('description');
+            $product->status = Product::STATUS_WAITING;
 
          
             if ($request->hasFile('primary_image')) {
@@ -91,6 +92,7 @@ class products extends Controller
                 'color.*' => 'string',
                 'size' => 'array', // Ensure size is an array
                 'size.*' => 'string',
+                
             ]);
     
             $product = Product::findOrFail($product_id);
@@ -191,7 +193,9 @@ class products extends Controller
    public function get_by_categoryId($category_id) {
     try {
         // Find the product by category_id
-        $product = Product::where('category_id', $category_id)->get();
+        $product = Product::where('category_id', $category_id)
+        ->where('status', Product::STATUS_ACCEPTED)
+        ->get();
         
         if ($product->isEmpty()) {
             return response()->json(["Result" => "No product found with category_id {$category_id}"], 404);

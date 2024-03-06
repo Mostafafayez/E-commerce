@@ -27,12 +27,19 @@ class Product extends Model
         'size',
         'discount',
        'new_price', 
+       'status'
     ];
 
     public function getNewPriceAttribute()
     {
         return $this->price * (1 - ($this->discount / 100));
     }
+
+
+
+    const STATUS_WAITING = 0;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REJECTED = -1;
 
     protected $casts = [
         'images' => 'array', 
