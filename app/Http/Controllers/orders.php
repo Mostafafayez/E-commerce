@@ -149,7 +149,8 @@ class orders extends Controller
                 $productData= [
                     'product_id' => $products->id,
                     'name' => $products->name,
-                    // 'price' => $products->price,
+                    'primary_image' => $products->primary_image,
+
                 ];
             }
     
