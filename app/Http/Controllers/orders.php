@@ -154,7 +154,7 @@ class orders extends Controller
             }
     
             // Store order, user, and product data in the orderData array
-            $orderData[]['order_details'] = [
+            $orderData[] = [
                 'order' => $orderDetails,
                 // 'user' => $userData,
                 'products' => $productData,
@@ -167,7 +167,7 @@ class orders extends Controller
         }
     
         // Return JSON response with order data
-        return response()->json(['orders' => $orderData], 200);
+        return response()->json( $orderData, 200);
     }
     
     
