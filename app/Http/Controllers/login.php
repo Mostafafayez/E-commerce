@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\users; 
+use App\Models\users;
 use Illuminate\Support\Facades\Hash; // Import Hash facade
 use Illuminate\Http\Request;
 
 class login extends Controller
 {
- 
 
 
-    
-  
+
+
+
     public function login(Request $request)
     {
         // Validate the request data
@@ -20,10 +20,10 @@ class login extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
+
         // Retrieve the user by email
         $user = users::where('email', $request->email)->first();
-    
+
         // Check if a user was found and if the password is correct
         if ($user && Hash::check($request->password, $user->password)) {
             // Authentication successful
@@ -44,7 +44,7 @@ class login extends Controller
     }
 
 
-    
+
         public function sign_up(Request $request)
         {
             // Validate the request data
@@ -56,13 +56,13 @@ class login extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
             ]);
-    
+
             // Hash the password
             $hashedPassword = Hash::make($request->password);
-    
+
             // Create a new user record with user_id = 2
             $user = users::create([
-                'type_id' => 2, 
+                'type_id' => 2,
                 'name' => $request->name,
                 'address' => $request->address,
                 'phonenum1' => $request->phonenum1,
@@ -70,7 +70,7 @@ class login extends Controller
                 'email' => $request->email,
                 'password' => $hashedPassword,
             ]);
-    
+
             // Return a response indicating success or failure
             if ($user) {
                 return response()->json(['message' => 'User registered successfully'], 201);
@@ -84,52 +84,103 @@ class login extends Controller
 
         public function updateUserInfo(Request $request, $id)
         {
+
+
+
             // Validate the request data
             $request->validate([
                 'name' => 'nullable|string|max:255',
                 'address' => 'nullable|string|max:255',
-                'phonenum1' => 'required|string|max:20',
-                'phonenum2' => 'required|string|max:20',
-                
+                'phonenum1' => 'nullable|string|max:20',
+                'phonenum2' => 'nullable|string|max:20',
+
             ]);
-        
-            // Find the user by ID
-            $user = users::find($id);
-        
-            // Check if user exists
+
+
+
+     $user = users::findOrFail($id) ;
+
+
             if (!$user) {
                 return response()->json(["error" => "No user found"], 404);
             }
-        
+
             // Update user information
             if ($request->filled('name')) {
                 $user->name = $request->name;
             }
-        
+
             if ($request->filled('address')) {
                 $user->address = $request->address;
             }
             if ($request->filled('phonenum1' )) {
                 $user->phonenum1 = $request->phonenum1;
             }
-        
+
             if ($request->filled('phonenum2')) {
                 $user->phonenum2 = $request->phonenum2;
+            }
+
+         // Save the updated user information
+            $user->save();
+
+            // Return a response indicating success
+            return response()->json(['message' => 'User information updated successfully'], 200);
+        }
+
+     /*public function updatenum(request $request,$id){
+
+
+    $request->validate([
+        // 'name' => 'nullable|string|max:255',
+        // 'address' => 'nullable|string|max:255',
+        'phonenum1' => 'required|string|max:20',
+        'phonenum2' => 'required|string|max:20',
+
+    ]);
+
+    $user = users::findOrFail($id);
+
+
+        if ($request->filled('phonenum1' )) {
+                $user->phone = $request->phonenum1;
+            }
+
+            if ($request->filled('phonenum2')) {
+                $user->phone = $request->phone;
             }
 
 
 
 
-        
+
             // Save the updated user information
             $user->save();
-        
+
             // Return a response indicating success
             return response()->json(['message' => 'User information updated successfully'], 200);
+        }*/
+
+
+
+
+        public function getusers(){
+            $user = users::all();
+
+            return response()->json($user, 200);
+
+
         }
-        
-    }
-    
+
+
+
+}
+
+
+
+
+
+
 
 
 

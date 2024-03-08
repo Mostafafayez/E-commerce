@@ -26,7 +26,7 @@ class OffersController extends Controller
         if ($request->hasFile('image')) {
             $fileName = $request->file('image')->store('posts', 'public');
             $offer->image = $fileName;
-          
+
         }
         $offer->save();
 
@@ -72,4 +72,16 @@ class OffersController extends Controller
         $offer->delete();
         return response()->json(['message' => 'Offer deleted successfully']);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

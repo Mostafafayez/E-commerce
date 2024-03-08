@@ -25,10 +25,19 @@ use App\Http\Controllers\productControl;
 //     return $request->user();
 // });
 
+
+
+
 Route::post('/login', [login::class, 'login']);
 Route::post('/Sign_up', [login::class, 'sign_up']);
-Route::put('/updateUserInfo/{id}', [login::class, 'updateUserInfo']);
+Route::post('/updateuser/{id}', [login::class,'updateUserInfo']);
+Route::get('/get', [login::class,'getusers']);
 
+
+
+
+
+//admin
 
 Route::post('/add_product/{category_id}/{user_id}', [products::class, 'add_product']);
 // Route::post('/update_product/{id}/{index_image}', [products::class, 'update_product']);
