@@ -17,67 +17,70 @@ class login extends Controller
     {
         // Validate the request data
         $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required',
             'password' => 'required',
         ]);
 
-        // Retrieve the user by email
-        $user = users::where('email', $request->email)->first();
+        // Retrieve the user by phone number
+        $user = users::where('phonenum1', $request->phone)->first();
 
         // Check if a user was found and if the password is correct
         if ($user && Hash::check($request->password, $user->password)) {
             // Authentication successful
-            // Retrieve the user's role from the database based on user_id
+            // Define user role based on your application logic
             $userRole = $user->type_id;
-            if ($userRole == 1) {
-                return response()->json(['type' => 'admin', 'user' => $user], 200);
-            } elseif ($userRole == 2) {
-                return response()->json(['type' => 'user', 'user' => $user], 200);
-            } else {
-                // Unknown user role
-                return response()->json(['message' => 'Unknown user role'], 403);
-            }
+            $response = [
+
+                'user' => $user,
+                'type' => ($userRole == 1) ? 'admin' : 'user',
+            ];
+            return response()->json($response,  200);
         } else {
-            // Authentication failed
-            return response()->json(['message' => 'Email or Password is incorrect'], 401);
+
+            return response()->json(['message' => 'Phone or password is incorrect'], 401);
         }
     }
 
 
+    public function sign_up(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phonenum1' => 'required|string|max:20',
+            'phonenum2' => 'required|string|max:20',
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
 
-        public function sign_up(Request $request)
-        {
-            // Validate the request data
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'address' => 'required|string|max:255',
-                'phonenum1' => 'required|string|max:20',
-                'phonenum2' => 'required|string|max:20',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:8',
-            ]);
-
-            // Hash the password
-            $hashedPassword = Hash::make($request->password);
-
-            // Create a new user record with user_id = 2
-            $user = users::create([
-                'type_id' => 2,
-                'name' => $request->name,
-                'address' => $request->address,
-                'phonenum1' => $request->phonenum1,
-                'phonenum2' => $request->phonenum2,
-                'email' => $request->email,
-                'password' => $hashedPassword,
-            ]);
-
-            // Return a response indicating success or failure
-            if ($user) {
-                return response()->json(['message' => 'User registered successfully'], 201);
-            } else {
-                return response()->json(['message' => 'Failed to register user'], 500);
-            }
+        // Check if email or phone number already exists
+        if (users::where('email', $request->email)->exists() || users::where('phonenum1', $request->phonenum1)->exists()) {
+            return response()->json(['message' => 'Email or phone number already exists'], 400);
         }
+
+        // Hash the password
+        $hashedPassword = Hash::make($request->password);
+
+        // Create a new user record with user_id = 2
+        $user = users::create([
+            'type_id' => 2,
+            'name' => $request->name,
+            'address' => $request->address,
+            'phonenum1' => $request->phonenum1,
+            'phonenum2' => $request->phonenum2,
+            'email' => $request->email,
+            'password' => $hashedPassword,
+        ]);
+
+        // Return a response indicating success or failure
+        if ($user) {
+            return response()->json(['message' => 'User registered successfully'], 201);
+        } else {
+            return response()->json(['message' => 'Failed to register user'], 500);
+        }
+    }
+
 
 
 
