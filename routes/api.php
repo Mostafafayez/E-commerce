@@ -5,6 +5,7 @@ use App\Http\Controllers\products;
 use Illuminate\Http\Request;
 
 use  App\Http\Controllers\login;
+use  App\Http\Controllers\reset_password;
 use  App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -33,8 +34,8 @@ Route::post('/Sign_up', [login::class, 'sign_up']);
 Route::post('/updateuser/{id}', [login::class,'updateUserInfo']);
 Route::get('/get', [login::class,'getusers']);
 
-
-
+Route::post('/resetPassword', [reset_password::class, 'resetPassword']);
+Route::get('/sendMessage', [reset_password::class, 'sendMessage']);
 
 
 //admin

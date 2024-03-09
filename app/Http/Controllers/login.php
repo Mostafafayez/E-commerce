@@ -128,7 +128,7 @@ class login extends Controller
             $user->save();
 
             // Return a response indicating success
-            return response()->json(['message' => 'User information updated successfully'], 200);
+            return response()->json(['message' => 'User information updated successfully', $user], 200);
         }
 
      /*public function updatenum(request $request,$id){
