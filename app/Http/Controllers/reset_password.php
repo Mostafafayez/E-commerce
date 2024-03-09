@@ -47,33 +47,38 @@ class reset_password extends Controller
         return response()->json(['message' => 'An OTP has been sent to your phone number. Please check and use it to reset your password.'], 200);
     }
 
-    public function sendMessage($phone , $otp)
+    public function sendMessage()
     {
         try {
             // Ensure the phone number has the prefix "+2"
-            $phone = "+2".$phone;
-
+            // $phone = "+2".$phone;
+            $phone = "+201143540620";
             // Prepare the request data
             $data = [
                 'messaging_product' => 'whatsapp',
                 'to' => $phone,
                 'type' => 'template',
                 'template' => [
-                    'name' => 'hello_world',
+                    'name' => "hello_world",
                     'language' => ['code' => 'en_US'],
-                    // 'parameters' => [
+                    // 'components' => [
                     //     [
-                    //         'name' => 'otp',
-                    //         'value' => $otp
+                    //         'type' => 'body',
+                    //         'parameters' => [
+                    //             [
+                    //                 'type' => 'text',
+                    //                 'text' =>"1223"
+                    //             ]
+                    //         ]
                     //     ]
                     // ]
                 ]
             ];
 
             // Send the POST request to Facebook Graph API
-            $response = Http::withToken('EAANLwZCBJZA6kBO5FE81RpG6idqJ18JIwYnknUX8ZBH3u6mcauG6Liav2CtxaZBnQOKW8BLiICEUlxVZABaFcferfnkPjv4jxNmjKVXNZBjnq8dKHRa0LruU9JIbDWFsPTYjz0paZCAEDf51XXaxYQuNGU4I1jasKGx5RjfTIEfTjZCNuY23Mj4bFDFoUGOXrTbsMvdZCsuHGH1yZC2nU4pIsZD')
+            $response = Http::withToken('EAANLwZCBJZA6kBOZBALijX189gSA8exj9cx8s6LFh5aTFPDEJ2Bhjmj7BU8upGIKM6lfgFzHh2skL2TFCRUfDEqabloC8LAff2lBGed84XVIzqZCTlRWZBru89csjBsZCdoqDAd7zLHjC9ZA6YXj1BOFnY8JAou94MKS9jzws3MytiLF691URRaG7V9jcR7ke93GXX2qD1oqi494ZAg3yQkZD')
                            ->post('https://graph.facebook.com/v18.0/270974746093104/messages', $data);
-                           var_dump($response);
+                        return $response;
             // Check if the response was successful
             if (!$response->successful()) {
                 // If the response is not successful, return the error message
