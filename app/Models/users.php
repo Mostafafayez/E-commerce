@@ -18,7 +18,7 @@ class users extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['type_id','name', 'address', 'phonenum1', 'email', 'password','phonenum2'];
+    protected $fillable = ['type_id','name', 'address', 'phonenum1', 'password','phonenum2'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,8 +48,8 @@ class users extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    
-    
+
+
 
 
 

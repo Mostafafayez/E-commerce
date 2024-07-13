@@ -117,7 +117,7 @@ class reset_password extends Controller
         }
 
         // Update user's password
-        $user = User::where('email', $request->email)->first();
+        $user = Users::where('email', $request->email)->first();
         $user->password = Hash::make($request->password);
         $user->save();
 

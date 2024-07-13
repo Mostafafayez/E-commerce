@@ -50,13 +50,13 @@ class login extends Controller
             'address' => 'required|string|max:255',
             'phonenum1' => 'required|string|max:20',
             'phonenum2' => 'required|string|max:20',
-            'email' => 'required|email',
+            // 'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
 
         // Check if email or phone number already exists
-        if (users::where('email', $request->email)->exists() || users::where('phonenum1', $request->phonenum1)->exists()) {
-            return response()->json(['message' => 'Email or phone number already exists'], 400);
+        if (users::where('phonenum1', $request->phonenum1)->exists()) {
+            return response()->json(['message' => ' phone number already exists'], 400);
         }
 
         // Hash the password
@@ -69,7 +69,7 @@ class login extends Controller
             'address' => $request->address,
             'phonenum1' => $request->phonenum1,
             'phonenum2' => $request->phonenum2,
-            'email' => $request->email,
+            // 'email' => $request->email,
             'password' => $hashedPassword,
         ]);
 
