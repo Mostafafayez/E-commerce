@@ -50,7 +50,7 @@ class login extends Controller
             'address' => 'required|string|max:255',
             'phonenum1' => 'required|string|max:20',
             'phonenum2' => 'required|string|max:20',
-            // 'email' => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
 
