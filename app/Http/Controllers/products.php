@@ -231,7 +231,7 @@ class products extends Controller
                         'id' => $product->id,
                         'name' => $product->name,
                         'description' => $product->description,
-                        'full_src1' => $product->primary_image,
+                        'full_src' => $product->primary_image,
                         'images' => $product->images,
                         'color' => $product->color,
                         'size' => $product->size,
