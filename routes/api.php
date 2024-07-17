@@ -57,8 +57,7 @@ Route::get('/Reject_Product/{Id}', [productControl::class,'rejectProduct']);
 
 
 
-
-
+Route::post('/import-categories', [CategoryController::class, 'import']);
 
 
 Route::post('/add_category', [CategoryController::class, 'add_category']);
