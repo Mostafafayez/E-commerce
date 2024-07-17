@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
     public function getAllCategories() {
         try {
-            $categories = Category::select('name', 'image')->get()->map(function ($category) {
+            $categories = Category::select('name', 'image','id')->get()->map(function ($category) {
                 return [
                     'id'  => $category->id,
                     'name' => $category->name,
