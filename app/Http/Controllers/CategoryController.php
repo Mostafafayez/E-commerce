@@ -68,13 +68,27 @@ class CategoryController extends Controller
 
     public function getAllCategories() {
         try {
-            $categories = Category::all();
+            $categories = Category::select('name', 'image')->get()->map(function ($category) {
+                return [
+                    'id'  => $category->id,
+                    'name' => $category->name,
+                    'full_src' => $category->image,
+                ];
+            });
             return response()->json($categories, 200);
         } catch (\Exception $e) {
-            return response()->json(["Error: " . $e->getMessage()], 500);
+            return response()->json(["Error" => $e->getMessage()], 500);
         }
     }
 
+    // public function getAllCategories() {
+    //     try {
+    //         $categories = Category::all();
+    //         return response()->json($categories, 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json(["Error: " . $e->getMessage()], 500);
+    //     }
+    // }
 
 
 
